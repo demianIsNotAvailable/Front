@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CInput } from "../../components/CInput/CInput";
 import { loginUser } from "../../services/apiCalls";
 import { jwtDecode } from "jwt-decode";
+import { isTokenValid } from "../../utils/functions";
 
 export const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -31,6 +32,7 @@ export const Login = () => {
 			}
 			// guardamos en localstorage nuestro token y los datos que contiene
 			localStorage.setItem("passport", JSON.stringify(passport))
+      isTokenValid(decodedToken.exp)
 		} else {
 			alert(response.message)
 		}
