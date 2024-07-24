@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CInput } from "../../components/CInput/CInput";
 import { useNavigate } from "react-router-dom";
-import { getProfile } from "../../services/apiCalls";
+import { getProfile, updateProfile } from "../../services/apiCalls";
 import "./Profile.css";
 
 export const Profile = () => {
@@ -18,6 +18,7 @@ export const Profile = () => {
   const [editting, setEditting] = useState(false);
 
   const passport = JSON.parse(localStorage.getItem("passport"));
+  const token = passport.token
 
   const navigate = useNavigate();
 
@@ -50,9 +51,10 @@ export const Profile = () => {
     console.log("estamso editando", editData);
   };
 
-  useEffect(() => {
-    console.log("estamos editando: ", editData);
-  }, [editting]);
+  const confirmButtonHandler = async () => {
+    const response = await updateProfile(editData, token)
+    console.log(response)
+  } 
 
   return (
     <>
@@ -81,8 +83,15 @@ export const Profile = () => {
       <CInput
         type="button"
         name="edit"
-        value="edit"
+        value={editting ? "Cancel" : "Edit"}
         emitOnClickButton={editButtonHandler}
+      />
+      <CInput
+        type="button"
+        name="send"
+        value="Save changes"
+        className={editting ? "" : "hidden"}
+        emitOnClickButton={confirmButtonHandler}
       />
     </>
   );
