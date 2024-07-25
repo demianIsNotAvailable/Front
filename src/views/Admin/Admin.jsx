@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../services/apiCalls";
+import { deleteUserById, getAllUsers } from "../../services/apiCalls";
 import "./Admin.css";
 import { CInput } from "../../components/CInput/CInput";
 
@@ -20,6 +20,12 @@ export const Admin = () => {
     bringAllUsers();
   }, []);
 
+  const deleteUserHandler = async (e) => {
+    const id = e.target.name
+    const res = await deleteUserById(token, id)
+    console.log (res)
+  }
+
   return (
     <>
       <h1>Admin</h1>
@@ -39,7 +45,14 @@ export const Admin = () => {
                 <div className="content">
                   {user.is_active ? "active" : "inactive"}
                 </div>
-                <div className="content"><CInput type="button" value="🛇"/></div>
+                <div className="content">
+                  <CInput
+                    type="button"
+                    name={user.id}
+                    value="🛇"
+                    emitOnClickButton={deleteUserHandler}
+                  />
+                </div>
               </div>
             );
           })}
