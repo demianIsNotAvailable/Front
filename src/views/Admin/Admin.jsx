@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/apiCalls";
-import "./Admin.css"
+import "./Admin.css";
+import { CInput } from "../../components/CInput/CInput";
 
 export const Admin = () => {
   const [users, setUsers] = useState([]);
@@ -12,9 +13,11 @@ export const Admin = () => {
     const bringAllUsers = async () => {
       const allUsers = await getAllUsers(token);
       console.log(allUsers);
-      setUsers(allUsers.data)
+      if (allUsers.success) {
+        setUsers(allUsers.data);
+      }
     };
-    bringAllUsers()
+    bringAllUsers();
   }, []);
 
   return (
@@ -22,21 +25,24 @@ export const Admin = () => {
       <h1>Admin</h1>
       <div className="users-container">
         <div className="table-row">
-            <div className="content">id</div>
-            <div className="content">email</div>
-            <div className="content">active</div>
-            <div className="content">actions</div>
+          <div className="content">id</div>
+          <div className="content">email</div>
+          <div className="content">active</div>
+          <div className="content">actions</div>
         </div>
-        { users.length && users.map((user) => {
+        {users.length &&
+          users.map((user) => {
             return (
-            <div className="table-row" key={user.id}>
+              <div className="table-row" key={user.id}>
                 <div className="content">{user.id}</div>
                 <div className="content">{user.email}</div>
-                <div className="content">{user.is_active ? "active" : "inactive"}</div>
-                <div className="content">actions</div>
-            </div>
-            )
-        })}
+                <div className="content">
+                  {user.is_active ? "active" : "inactive"}
+                </div>
+                <div className="content"><CInput type="button" value="🛇"/></div>
+              </div>
+            );
+          })}
       </div>
     </>
   );
