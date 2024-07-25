@@ -53,7 +53,11 @@ export const Profile = () => {
 
   const confirmButtonHandler = async () => {
     const response = await updateProfile(editData, token)
-    console.log(response)
+    if (response.success) {
+      const newData = await getProfile(token)
+      setProfileData(newData.data)
+      setEditting(!editting)
+    }
   } 
 
   return (

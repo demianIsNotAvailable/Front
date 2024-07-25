@@ -41,8 +41,6 @@ export const getProfile = async (token) => {
 }
 
 export const updateProfile = async (data, token) => {
-	console.log(data)
-	console.log(JSON.stringify(data))
 	const response = await fetch(`${URL}/profile`, {
 		method: "PUT",
 		headers: {
