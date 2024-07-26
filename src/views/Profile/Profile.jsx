@@ -52,11 +52,16 @@ export const Profile = () => {
   };
 
   const confirmButtonHandler = async () => {
+    try {
     const response = await updateProfile(editData, token)
     if (response.success) {
       const newData = await getProfile(token)
       setProfileData(newData.data)
       setEditting(!editting)
+
+    }} catch (err) {
+      
+      setErrorMessage(err.message)
     }
   } 
 

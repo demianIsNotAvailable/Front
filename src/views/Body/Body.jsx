@@ -8,6 +8,7 @@ import { Register } from "../Register/Register";
 import { Books } from "../Books/Books";
 import { Profile } from "../Profile/Profile";
 import { Admin } from "../Admin/Admin";
+import { Appointments } from "../Appointments/Appointments";
 
 export const Body = () => {
   
@@ -26,6 +27,7 @@ export const Body = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/books" element={<Books />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/apps" element={<Appointments />} />
         {role === "super_admin" && <Route path="/admin" element={<Admin />} />}
       </Routes>
     </>

@@ -23,7 +23,7 @@ export const CInput = (
         onChange={emitFunction}
         onClick={emitOnClickButton}
         value={value}
-        className={className}
+        className={`input-design text-size-xl background-teal bold position-absolute ${className}`}
       />    
     </>
   )
