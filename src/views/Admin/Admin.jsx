@@ -14,7 +14,6 @@ export const Admin = () => {
       const allUsers = await getAllUsers(token);
       console.log(allUsers);
       if (allUsers.success) {
-        throw new Error
         setUsers(allUsers.data);
       }
     };
