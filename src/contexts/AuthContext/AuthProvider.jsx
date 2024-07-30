@@ -2,7 +2,7 @@ import { createContext, useContext} from "react";
 import { useAthorization } from "./AuthContext";
 
 // creamos el contexto que luego usaremos
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // creamos el proveedor del contexto (nuestro componente <ContextProvider> <ContextProvider/>)
 export const AuthProvider = ({ children }) => {
@@ -20,6 +20,3 @@ export const AuthProvider = ({ children }) => {
 // const {token, isLoggedIn} = useContext(AuthContext)
 // const {token, isLoggedIn} = useAuth()
 
-export const useAuth = () => {
-    return useContext(AuthContext)
-}

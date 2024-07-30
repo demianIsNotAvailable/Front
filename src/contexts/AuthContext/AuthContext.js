@@ -1,3 +1,5 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 
 export const useAthorization = () => {
     const [token, setToken] = useState(null);
@@ -32,4 +34,8 @@ export const useAthorization = () => {
     }
     
     return {token, isLoggedIn, isAdmin, setSessionData, logout}
+}
+
+export const useAuth = () => {
+  return useContext(AuthContext)
 }
