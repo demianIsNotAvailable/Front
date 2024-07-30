@@ -1,8 +1,8 @@
-export const CSelect = ({category, options, handler}) => {
+export const CSelect = ({category, name, options, handler}) => {
 
 
   return (
-    <select defaultValue="" onChange={handler}>
+    <select defaultValue="" name={name} onChange={handler}>
       <option disabled hidden value="">
         {category}
       </option>

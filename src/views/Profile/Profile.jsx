@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CInput } from "../../components/CInput/CInput";
 import { useNavigate } from "react-router-dom";
 import { getProfile, updateProfile } from "../../services/apiCalls";
+import { useAuth } from "../../contexts/AuthContext/AuthContext";
 import "./Profile.css";
 
 export const Profile = () => {
@@ -10,24 +11,23 @@ export const Profile = () => {
     is_active: null,
     created_at: "",
   });
-
   const [editData, setEditData] = useState({
     name: "",
     email: "",
   });
   const [editting, setEditting] = useState(false);
 
-  const passport = JSON.parse(localStorage.getItem("passport"));
-  const token = passport.token
+  const { token, isLoggedIn } = useAuth()
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!passport) {
+    console.log(isLoggedIn, token)
+    if (!isLoggedIn) {
       navigate("/login");
     } else {
       const bringMyProfile = async () => {
-        const response = await getProfile(passport.token);
+        const response = await getProfile(token);
         setProfileData(response.data);
         console.log(response);
       };

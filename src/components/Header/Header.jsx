@@ -1,23 +1,20 @@
 import { useNavigate } from "react-router";
 import { CSurfer } from "../CSurfer/CSurfer";
+import { useAuth } from "../../contexts/AuthContext/AuthContext";
 
 export const Header = () => {
   const navigate = useNavigate();
 
-  const passport = JSON.parse(localStorage.getItem("passport"));
-  let token;
-  if (passport) {
-    token = passport.token;
-  }
+  const {isLoggedIn, logout} = useAuth()
 
   return (
     <>
       <div className="flex justify-space-betwwen">
         <CSurfer path="/" content="Home" />
         <CSurfer path="/books" content="Books" />
-        {token ? (
+        {isLoggedIn ? (
           <>
-            <div onClick={() => localStorage.removeItem("passport")}> LOGOUT </div>
+            <div onClick={logout}> LOGOUT </div>
             <CSurfer path="/profile" content="Profile" />
           </>
         ) : (

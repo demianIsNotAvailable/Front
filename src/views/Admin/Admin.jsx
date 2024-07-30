@@ -38,6 +38,7 @@ export const Admin = () => {
   return (
     <>
       <h1>Admin</h1>
+      <input type="text" name="filter" value={userFilter} placeholder="Search user email" onChange={handleUserFilter}/>
       <div className="users-container">
         <div className="table-row">
           <div className="content">id</div>

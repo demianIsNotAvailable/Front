@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CInput } from "../../components/CInput/CInput";
 import { loginUser } from "../../services/apiCalls";
 import { jwtDecode } from "jwt-decode";
 import { isTokenValid } from "../../utils/functions";
+import { useAuth } from "../../contexts/AuthContext/AuthContext";
 
 export const Login = () => {
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  const {setSessionData} = useAuth()
 
   function handleChange(e) {
     console.log("HandleChange");
@@ -25,13 +29,14 @@ export const Login = () => {
 		const response = await loginUser(credentials)
 
 		if (response.success) {
+      console.log("éxito en login")
 			const decodedToken = jwtDecode(response.token)
 			const passport = {
 				token: response.token,
 				tokenData: decodedToken
 			}
 			// guardamos en localstorage nuestro token y los datos que contiene
-			localStorage.setItem("passport", JSON.stringify(passport))
+			setSessionData(passport)
       isTokenValid(decodedToken.exp)
 		} else {
 			alert(response.message)
