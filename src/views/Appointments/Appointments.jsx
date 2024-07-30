@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CInput } from "../../components/CInput/CInput";
 import { CSelect } from "../../components/CSelect/CSelect";
 import { createAppointment } from "../../services/apiCalls";
+import { SampleContext } from "../../contexts/SampleContext/SampleContext";
 
 export const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -15,6 +16,7 @@ export const Appointments = () => {
   //     // getMyAppointments(token)
   //     console.log(newAppointment);
   //   }, [newAppointment]);
+  const secretNumber = useContext(SampleContext)
 
   const inputHandler = (e) => {
     if (e.target.value === "Elige el servicio") {
@@ -49,6 +51,7 @@ export const Appointments = () => {
     .slice(0, new Date().toISOString().lastIndexOf(":"));
   return (
     <div>
+      <h3>{secretNumber}</h3>
       <input
         type="datetime-local"
         min={todayFullTimeString}

@@ -7,7 +7,10 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Body />
+			{/* <ContextProvider> */}
+				<Body />
+			{/* <ContextProvider/> */}
+
 		</>
 	);
 }

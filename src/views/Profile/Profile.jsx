@@ -16,6 +16,7 @@ export const Profile = () => {
     email: "",
   });
   const [editting, setEditting] = useState(false);
+  const [secretNumber, setSecretNumber] = useState(42)
 
   const { token, isLoggedIn } = useAuth()
 

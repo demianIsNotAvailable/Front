@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { registerUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router";
+import { SampleContext } from "../../contexts/SampleContext/SampleContext";
 
 export const Register = () => {
 	const navigate = useNavigate()
@@ -9,6 +10,8 @@ export const Register = () => {
 		email: "",
 		password: "",
 	});
+
+	const {setNumber, saludar} = useContext(SampleContext)
 
 	function handleChange(e) {
 		console.log("Handle Change");
@@ -59,6 +62,8 @@ export const Register = () => {
 				placeholder="Password"
 				onChange={handleChange}
 			/>
+			<input type="number" onChange={(e) => setNumber(e.target.value)}/>
+			<input type="text" onChange={(e) => saludar(e.target.value)}/>
 			<input type="button" value="Register" onClick={register} />
 		</>
 	);
